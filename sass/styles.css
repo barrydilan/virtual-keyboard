@@ -56,4 +56,39 @@ p, h1, h2, h3, h4, h5, h6 {
 */
 #root, #__next {
   isolation: isolate;
+}
+
+.keyboard {
+  max-width: 862px;
+  margin: 0 auto;
+  display: grid;
+  background-color: rgb(136, 136, 136);
+}
+
+.row {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 1px;
+}
+
+.key {
+  width: 60px;
+  height: 50px;
+}
+
+.enter, .backspace, .shift, .caps-lock {
+  width: calc(5% + 82px);
+}
+
+.ctrl, .alt, .tab, .command {
+  width: calc(5% + 48px);
+}
+
+.ctrl {
+  width: calc(5% + 22px);
+}
+
+.space {
+  width: calc(20% + 70px);
 }/*# sourceMappingURL=styles.css.map */
