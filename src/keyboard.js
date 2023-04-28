@@ -72,6 +72,12 @@ export class Keyboard {
     }
   }
 
+  toggleLang() {
+    this.lang = this.lang === 'eng' ? 'ru' : 'eng';
+    this.container.innerHTML = '';
+    this.generateKeyboard(this.lang);
+  }
+
   generateKeyboard() {
     const BODY = document.querySelector('body');
     BODY.appendChild(this.container);
@@ -104,6 +110,9 @@ export class Keyboard {
       case 'Shift':
         keyElement.classList.add('shift');
         keyElement.dataset.code = 'Shift';
+        keyElement.addEventListener('click', () => {
+          this.toggleLang();
+        });
         break;
       case 'Ctrl':
         keyElement.classList.add
