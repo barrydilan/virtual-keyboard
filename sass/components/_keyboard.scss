@@ -3,7 +3,10 @@
   margin: 0 auto;
   // text-align: center;
   display: grid;
-  background-color: rgb(136, 136, 136);
+  // background-color: rgb(136, 136, 136);
+//   background: rgb(180,58,145);
+// background: linear-gradient(90deg, rgba(180,58,145,1) 0%, rgba(65,150,183,1) 25%, rgba(29,223,253,1) 40%, rgba(69,80,252,1) 100%);
+background: black;
 }
 
 .row {
@@ -15,6 +18,16 @@
 .key {
   width: 60px;
   height: 50px;
+  background: none;
+  color: #47E10C;
+  border: 1px solid #48e10c2e;
+}
+
+.key:active {
+  // border-radius: 50%;
+  border: 1px solid #48e10c8e;
+  transform: scale(0.9);
+  transition: 0.1s;
 }
 
 .enter, .backspace, .shift, .caps-lock{

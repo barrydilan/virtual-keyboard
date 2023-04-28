@@ -48,7 +48,7 @@ export class Keyboard {
     ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '↑', 'Shift'],
     ['Ctrl', 'Option', 'Command', ' ', 'Command', 'Option','←', '↓', '→', 'Ctrl']
   ];
-ROWS_RU = [['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+  ROWS_RU = [['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
   ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\/'],
   ['CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
   ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', ',',  '↑', 'Shift'],
@@ -74,9 +74,6 @@ ROWS_RU = [['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'B
   }
 
   toggleCase() {
-    // Determine whether to use uppercase or lowercase letters based on whether shift is pressed
-    let keyCase = this.isShiftPressed ? '_UPP' : '';
-    // Clear the current keyboard and generate a new one with the appropriate case
     this.container.innerHTML = '';
     if (this.lang !== 'eng') {
       this.generate(this.isShiftPressed ? this.ROWS_RU_UPP : this.ROWS_RU);
@@ -143,4 +140,5 @@ ROWS_RU = [['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'B
     }
     return keyElement;
   }
+
 }
