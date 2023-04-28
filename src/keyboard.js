@@ -14,6 +14,7 @@ export class Keyboard {
   handleKeyDown(event) {
     if (event.key === 'Shift') {
       this.isShiftPressed = true;
+      this.toggleCase()
     }
     if (event.key === 'Alt') {
       this.isAltPressed = true;
@@ -26,22 +27,41 @@ export class Keyboard {
   handleKeyUp(event) {
     if (event.key === 'Shift') {
       this.isShiftPressed = false;
+      this.toggleCase()
     }
     if (event.key === 'Alt') {
       this.isAltPressed = false;
     }
   }
   
+  ROWS_EN = [
+    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+    ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+    ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'],
+    ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '↑', 'Shift'],
+    ['Ctrl', 'Option', 'Command', ' ', 'Command', 'Option','←', '↓', '→', 'Ctrl']
+  ];
+  ROWS_EN_UPP  = [
+    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+    ['Tab', 'Q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+    ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'],
+    ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '↑', 'Shift'],
+    ['Ctrl', 'Option', 'Command', ' ', 'Command', 'Option','←', '↓', '→', 'Ctrl']
+  ];
+  ROWS_RU = [['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+  ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\'],
+  ['CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
+  ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.',  '↑', 'Shift'],
+  ['Ctrl', 'Option', 'Command', ' ', 'Command', 'Option', '←', '↓', '→', 'Ctrl']
+  ];
+  ROWS_RU_UPP = [['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+  ['Tab', 'Q', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\'],
+  ['CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
+  ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.',  '↑', 'Shift'],
+  ['Ctrl', 'Option', 'Command', ' ', 'Command', 'Option', '←', '↓', '→', 'Ctrl']
+  ];
 
-  generateEn() {
-    const ROWS = [
-      ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
-      ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
-      ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'],
-      ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '↑', 'Shift'],
-      ['Ctrl', 'Option', 'Command', ' ', 'Command', 'Option','←', '↓', '→', 'Ctrl']
-    ];
-
+  generate(ROWS) {
     for (let row of ROWS) {
       const divRow = document.createElement('div');
       divRow.classList.add('row');
@@ -50,33 +70,21 @@ export class Keyboard {
         divRow.appendChild(keyElement);
         this.container.appendChild(divRow);
       }
-      // const breakElement = document.createElement('br');
-      // this.container.appendChild(breakElement);
-    }
+   }
   }
 
-  generateRu() {
-    const ROWS = [['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
-      ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\'],
-      ['CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
-      ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.',  '↑', 'Shift'],
-      ['Ctrl', 'Option', 'Command', ' ', 'Command', 'Option', '←', '↓', '→', 'Ctrl']
-    ];
-    
-    for (let row of ROWS) {
-      const divRow = document.createElement('div');
-      divRow.classList.add('row');
-
-      for (let key of row) {
-        const keyElement = this.createKey(key);
-        divRow.appendChild(keyElement);
-        this.container.appendChild(divRow);
-      }
-      //const breakElement = document.createElement('br');
-      //this.container.appendChild(breakElement);
+  toggleCase() {
+    // Determine whether to use uppercase or lowercase letters based on whether shift is pressed
+    let keyCase = this.isShiftPressed ? '_UPP' : '';
+    // Clear the current keyboard and generate a new one with the appropriate case
+    this.container.innerHTML = '';
+    if (this.lang !== 'eng') {
+      this.generate(this.isShiftPressed ? this.ROWS_RU_UPP : this.ROWS_RU);
+    } else {
+      this.generate(this.isShiftPressed ? this.ROWS_EN_UPP : this.ROWS_EN);
     }
   }
-
+  
   toggleLang() {
     this.lang = this.lang === 'eng' ? 'ru' : 'eng';
     this.container.innerHTML = '';
@@ -86,7 +94,7 @@ export class Keyboard {
   generateKeyboard() {
     const BODY = document.querySelector('body');
     BODY.appendChild(this.container);
-    this.lang === 'eng' ? this.generateEn() : this.generateRu();
+    this.lang === 'eng' ? this.generate(this.ROWS_EN) : this.generate(this.ROWS_RU);
   }
 
   createKey(key) {
@@ -119,9 +127,6 @@ export class Keyboard {
       case 'Shift':
         keyElement.classList.add('shift');
         keyElement.dataset.code = 'Shift';
-        // keyElement.addEventListener('click', () => {
-        //   // this.toggleLang();
-        // });
         break;
       case 'Ctrl':
         keyElement.classList.add('ctrl');
