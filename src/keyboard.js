@@ -1,7 +1,8 @@
 import { Key } from "./key.js";
 
 export class Keyboard {
-  constructor(lang) {
+  constructor(lang, textArea) {
+    this.textArea = textArea;
     this.lang = lang;
     this.isShiftPressed = false;
     this.isAltPressed = false;
@@ -10,6 +11,64 @@ export class Keyboard {
     this.container = document.createElement('div');
     this.container.classList.add('keyboard');
   }
+  charMap = {
+    en: {
+      KeyA: 'a',
+      KeyB: 'b',
+      KeyC: 'c',
+      KeyD: 'd',
+      KeyE: 'e',
+      KeyF: 'f',
+      KeyG: 'g',
+      KeyH: 'h',
+      KeyI: 'i',
+      KeyJ: 'j',
+      KeyK: 'k',
+      KeyL: 'l',
+      KeyM: 'm',
+      KeyN: 'n',
+      KeyO: 'o',
+      KeyP: 'p',
+      KeyQ: 'q',
+      KeyR: 'r',
+      KeyS: 's',
+      KeyT: 't',
+      KeyU: 'u',
+      KeyV: 'v',
+      KeyW: 'w',
+      KeyX: 'x',
+      KeyY: 'y',
+      KeyZ: 'z',
+    },
+    ru: {
+      KeyA: 'ф',
+      KeyB: 'и',
+      KeyC: 'с',
+      KeyD: 'в',
+      KeyE: 'у',
+      KeyF: 'а',
+      KeyG: 'п',
+      KeyH: 'р',
+      KeyI: 'ш',
+      KeyJ: 'о',
+      KeyK: 'л',
+      KeyL: 'д',
+      KeyM: 'ь',
+      KeyN: 'т',
+      KeyO: 'щ',
+      KeyP: 'з',
+      KeyQ: 'й',
+      KeyR: 'к',
+      KeyS: 'ы',
+      KeyT: 'е',
+      KeyU: 'г',
+      KeyV: 'м',
+      KeyW: 'ц',
+      KeyX: 'ч',
+      KeyY: 'н',
+      KeyZ: 'я',
+    },
+  };
 
   handleKeyDown(event) {
     if (event.key === 'Shift') {
@@ -22,6 +81,10 @@ export class Keyboard {
     if (this.isShiftPressed && this.isAltPressed) {
       this.toggleLang();
     }
+    const char = this.charMap[this.lang][event.code];
+    if (char) {
+      this.textArea.value += char;
+    }
   }
   
   handleKeyUp(event) {
@@ -33,7 +96,8 @@ export class Keyboard {
       this.isAltPressed = false;
     }
   }
-  
+
+
   ROWS_EN = [
     ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
     ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
@@ -62,6 +126,7 @@ export class Keyboard {
   ];
 
   generate(ROWS) {
+
     for (let row of ROWS) {
       const divRow = document.createElement('div');
       divRow.classList.add('row');
@@ -75,7 +140,7 @@ export class Keyboard {
 
   toggleCase() {
     this.container.innerHTML = '';
-    if (this.lang !== 'eng') {
+    if (this.lang !== 'en') {
       this.generate(this.isShiftPressed ? this.ROWS_RU_UPP : this.ROWS_RU);
     } else {
       this.generate(this.isShiftPressed ? this.ROWS_EN_UPP : this.ROWS_EN);
@@ -83,23 +148,27 @@ export class Keyboard {
   }
   
   toggleLang() {
-    this.lang = this.lang === 'eng' ? 'ru' : 'eng';
+    this.lang = this.lang === 'en' ? 'ru' : 'en';
     this.container.innerHTML = '';
+    console.log(this.lang)
     this.generateKeyboard(this.lang);
   }
 
   generateKeyboard() {
     const BODY = document.querySelector('body');
     BODY.appendChild(this.container);
-    this.lang === 'eng' ? this.generate(this.ROWS_EN) : this.generate(this.ROWS_RU);
+    this.lang === 'en' ? this.generate(this.ROWS_EN) : this.generate(this.ROWS_RU);
   }
 
-  createKey(key) {
+  createKey(key, i) {
     const keyElement = document.createElement('button');
     keyElement.textContent = key;
     keyElement.classList.add('key');
-    keyElement.dataset.code = key;
-
+    keyElement.dataset.code = key + i;
+    keyElement.addEventListener('click', () => {
+      this.textArea.value += key;
+    });
+  
     switch (key) {
       case 'Backspace':
         keyElement.classList.add('backspace');

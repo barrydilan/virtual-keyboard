@@ -2,9 +2,14 @@ import { Keyboard } from "./keyboard.js";
 const ROOT = document.createElement('div');
 ROOT.classList.add('root');
 const BODY = document.querySelector('body');
-BODY.appendChild(ROOT);
-const keyboard = new Keyboard(';');
+const text = document.createElement('textarea');
+text.classList.add('text');
+BODY.appendChild(text);
+const keyboard = new Keyboard('ru', text);
 keyboard.generateKeyboard();
-document.addEventListener('keydown', (event) => {
-  console.log(event.key)
+text.addEventListener('keydown', (event) => {
+  event.preventDefault()
 })
+document.addEventListener('keydown', (e) => {
+  console.log(e);
+});

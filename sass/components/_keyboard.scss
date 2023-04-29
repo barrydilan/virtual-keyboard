@@ -1,3 +1,7 @@
+body {
+  display: flex; 
+  flex-direction: column;
+}
 .keyboard {
   max-width: 862px;
   margin: 0 auto;
@@ -44,5 +48,22 @@ background: black;
 
 .space {
   width: calc(20% + 70px);
+
+}
+
+.text {
+  width: 862px;
+  margin: 0 auto;
+  margin-top: 150px;
+  height: 200px;
+  border: 1px solid #48e10c96;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
 
 }

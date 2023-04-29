@@ -1,19 +1,15 @@
 export class Key {
-  constructor(label, code, width, height) {
-    this.label = label;
-    this.code = code;
-    this.width = width;
-    this.height = height;
+  constructor(labelEn, labelRu) {
+    this.labelEn = labelEn;
+    this.labelRu = labelRu
   }
 
-  render(container) {
+  render(lang) {
+    lang = 'ru' ? label = this.labelRu : label = this.labelEn;
     const keyElement = document.createElement('button');
     keyElement.textContent = this.label;
     keyElement.classList.add('key');
-    keyElement.style.width = `${this.width}px`;
-    keyElement.style.height = `${this.height}px`;
-    keyElement.dataset.code = this.code;
-    container.appendChild(keyElement);
+    return keyElement;
   }
 
 }

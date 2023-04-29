@@ -58,6 +58,11 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .keyboard {
   max-width: 862px;
   margin: 0 auto;
@@ -100,4 +105,18 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .space {
   width: calc(20% + 70px);
+}
+
+.text {
+  width: 862px;
+  margin: 0 auto;
+  margin-top: 150px;
+  height: 200px;
+  border: 1px solid rgba(72, 225, 12, 0.5882352941);
+  overflow: auto;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none; /*remove the resize handle on the bottom right*/
 }/*# sourceMappingURL=styles.css.map */
