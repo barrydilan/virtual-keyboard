@@ -329,6 +329,12 @@ export class Keyboard {
     const char = this.isShiftPressed ? this.charMapUpper[this.lang][event.code] : this.charMap[this.lang][event.code];
     if (char) {
       this.textArea.value += char;
+      const key = this.container.querySelector(`[data-code="${char}"]`);
+      console.log(char)
+      if (key) {
+        key.classList.add('active');
+      }
+    
     }
   }
   
@@ -340,6 +346,13 @@ export class Keyboard {
     if (event.key === 'Alt') {
       this.isAltPressed = false;
     }
+    const char = this.charMap[this.lang][event.code];
+    if (!char) return;
+    const key = this.container.querySelector(`[data-code="${char}"]`);
+    if (key) {
+      key.classList.remove('active');
+    }
+  
   }
 
 
@@ -405,11 +418,11 @@ export class Keyboard {
     this.lang === 'en' ? this.generate(this.ROWS_EN) : this.generate(this.ROWS_RU);
   }
 
-  createKey(key, i) {
+  createKey(key) {
     const keyElement = document.createElement('button');
     keyElement.textContent = key;
     keyElement.classList.add('key');
-    keyElement.dataset.code = key + i;
+    keyElement.dataset.code = key;
     keyElement.addEventListener('click', () => {
       this.textArea.value += key;
     });
