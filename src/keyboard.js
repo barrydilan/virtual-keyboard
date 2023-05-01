@@ -5,6 +5,7 @@ export class Keyboard {
     this.textArea = textArea;
     this.lang = lang;
     this.isShiftPressed = false;
+    this.isCapsPressed = false;
     this.isAltPressed = false;
     document.addEventListener('keydown', this.handleKeyDown.bind(this));
     document.addEventListener('keyup', this.handleKeyUp.bind(this));
@@ -323,10 +324,28 @@ export class Keyboard {
     if (event.key === 'Alt') {
       this.isAltPressed = true;
     }
+    if (event.key === 'Backspace') {
+      // this.textArea.value = this.textArea.value.slice(0, -1);
+    }
+    if (event.key === 'Enter') {
+      this.textArea.value += '\n';
+    }
+    if (event.key === 'Tab') {
+      this.textArea.value += '\t';
+    }
+    if (event.key === ' ') {
+      this.textArea.value += ' ';
+    }
+    if (event.key === 'CapsLock') {
+      console.log(this.isCapsPressed);
+      this.isCapsPressed = true;
+      this.toggleCaps();
+    }
+  
     if (this.isShiftPressed && this.isAltPressed) {
       this.toggleLang();
     }
-    const char = this.isShiftPressed ? this.charMapUpper[this.lang][event.code] : this.charMap[this.lang][event.code];
+    const char = this.isShiftPressed || this.isCapsPressed ? this.charMapUpper[this.lang][event.code] : this.charMap[this.lang][event.code];
     if (char) {
       this.textArea.value += char;
       const key = this.container.querySelector(`[data-code="${char}"]`);
@@ -346,6 +365,10 @@ export class Keyboard {
     if (event.key === 'Alt') {
       this.isAltPressed = false;
     }
+    if (event.key === 'CapsLock') {
+      this.isCapsPressed = false;
+      this.toggleCaps();
+    }
     const char = this.charMap[this.lang][event.code];
     if (!char) return;
     const key = this.container.querySelector(`[data-code="${char}"]`);
@@ -354,7 +377,26 @@ export class Keyboard {
     }
   
   }
-
+  uppercaseSingleLetters(rows) {
+    const uppercaseRows = [];
+  
+    for (let row of rows) {
+      const uppercaseRow = [];
+  
+      for (let key of row) {
+        if (key.length === 1) {
+          uppercaseRow.push(key.toUpperCase());
+        } else {
+          uppercaseRow.push(key);
+        }
+      }
+  
+      uppercaseRows.push(uppercaseRow);
+    }
+  
+    return uppercaseRows;
+  }
+  
 
   ROWS_EN = [
     ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
@@ -395,13 +437,30 @@ export class Keyboard {
       }
    }
   }
-
-  toggleCase() {
+  toggleCaps() {
+    console.log(this.uppercaseSingleLetters(this.ROWS_RU))
     this.container.innerHTML = '';
     if (this.lang !== 'en') {
-      this.generate(this.isShiftPressed ? this.ROWS_RU_UPP : this.ROWS_RU);
+      this.generate(this.isCapsPressed ? this.uppercaseSingleLetters(this.ROWS_RU) : this.ROWS_RU);
     } else {
-      this.generate(this.isShiftPressed ? this.ROWS_EN_UPP : this.ROWS_EN);
+      this.generate(this.isCapsPressed ? this.uppercaseSingleLetters(this.ROWS_EN) : this.ROWS_EN);
+    }
+
+  }
+  toggleCase() {
+    
+    this.container.innerHTML = '';
+    if (this.lang !== 'en') {
+      if (this.isCapsPressed) {
+        this.generate(this.uppercaseSingleLetters(this.ROWS_RU));
+      }
+      else {this.generate(this.isShiftPressed ? this.ROWS_RU_UPP : this.ROWS_RU);}
+    } 
+    else  {
+      if (this.isCapsPressed) {
+        this.generate(this.uppercaseSingleLetters(this.ROWS_EN));
+      }
+      else {this.generate(this.isShiftPressed ? this.ROWS_EN_UPP : this.ROWS_EN);}
     }
   }
   

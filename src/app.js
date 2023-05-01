@@ -8,8 +8,22 @@ BODY.appendChild(text);
 const keyboard = new Keyboard('ru', text);
 keyboard.generateKeyboard();
 text.addEventListener('keydown', (event) => {
-  event.preventDefault()
-})
+//   if (!event.code.startsWith('Arrow')) {
+//     // блокируем ввод символов с физической клавиатуры
+//     event.preventDefault();
+//   }
+if (event.keyCode === 38 || // arrow up
+      event.keyCode === 40 || // arrow down
+      event.keyCode === 37 || // arrow left
+      event.keyCode === 39 || // arrow right
+      event.keyCode === 8) {  // backspace
+    // Не предотвращаем действие браузера
+  } else {
+    // Предотвращаем действие браузера для всех остальных клавиш
+    event.preventDefault();
+  }
+});
+
 document.addEventListener('keydown', (e) => {
   console.log(e);
 });

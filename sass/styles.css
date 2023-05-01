@@ -61,6 +61,8 @@ p, h1, h2, h3, h4, h5, h6 {
 body {
   display: flex;
   flex-direction: column;
+  background-color: black;
+  background-image: radial-gradient(rgba(0, 114, 0, 0.75), black 50%);
 }
 
 .keyboard {
@@ -68,6 +70,7 @@ body {
   margin: 0 auto;
   display: grid;
   background: black;
+  margin-top: 20px;
 }
 
 .row {
@@ -81,9 +84,11 @@ body {
   width: 60px;
   height: 50px;
   background: none;
-  color: #47E10C;
+  color: rgba(72, 225, 12, 0.6078431373);
   border: 1px solid rgba(72, 225, 12, 0.1803921569);
   font: 0.8rem IBM Plex Mono, monospace;
+  border-radius: 4px;
+  padding: 5px;
 }
 
 .key:active {
@@ -113,14 +118,14 @@ body {
   margin: 0 auto;
   margin-top: 150px;
   height: 200px;
-  border: 1px solid rgba(72, 225, 12, 0.5882352941);
+  border: 1px solid rgba(72, 225, 12, 0.1647058824);
   overflow: auto;
   outline: none;
   background-color: black;
-  background-image: radial-gradient(rgba(0, 114, 0, 0.75), black 50%);
+  background-image: linear-gradient(rgba(50, 114, 0, 0.42), black 50%);
   font: 1rem IBM Plex Mono, monospace;
-  text-shadow: 0 0 5px #C8C8C8;
-  color: white;
+  text-shadow: 1px 1px 15px #8cff00;
+  color: rgba(255, 255, 255, 0.72);
   font-size: 22px;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
