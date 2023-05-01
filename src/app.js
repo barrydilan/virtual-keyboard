@@ -5,23 +5,12 @@ const BODY = document.querySelector('body');
 const text = document.createElement('textarea');
 text.classList.add('text');
 BODY.appendChild(text);
-const keyboard = new Keyboard('ru', text);
+const userLanguage = localStorage.getItem('userLanguage') || 'en';
+const keyboard = new Keyboard(userLanguage, text);
 keyboard.generateKeyboard();
+
+
 text.addEventListener('keydown', (event) => {
-//   if (!event.code.startsWith('Arrow')) {
-//     // блокируем ввод символов с физической клавиатуры
-//     event.preventDefault();
-//   }
-// if (event.keyCode === 38 || // arrow up
-//       event.keyCode === 40 || // arrow down
-//       event.keyCode === 37 || // arrow left
-//       event.keyCode === 39 || // arrow right
-//       event.keyCode === 8) {  // backspace
-//     // Не предотвращаем действие браузера
-//   } else {
-//     // Предотвращаем действие браузера для всех остальных клавиш
-//     event.preventDefault();
-//   }
   if (event.key === 'ArrowUp') {
     // Perform the desired action when the up arrow is pressed
     console.log('Up arrow pressed');
@@ -50,10 +39,11 @@ text.addEventListener('keydown', (event) => {
     event.preventDefault();
 
   }
-  
-
 });
 
-document.addEventListener('keydown', (e) => {
-  console.log(e);
-});
+const Tab = document.querySelector(`[data-code="Tab"]`);
+Tab.addEventListener('click', () => {
+  text.value +=  '    ';
+})
+
+

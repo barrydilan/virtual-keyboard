@@ -37,10 +37,20 @@ margin-top: 20px;
 .key:active {
   // border-radius: 50%;
   border: 1px solid #48e10c8e;
+  // background: #48e10c8e;
   transform: scale(0.9);
   transition: 0.1s;
 }
+.key {
+  outline: none;
+}
 
+.active {
+  border: 1px solid #48e10c8e;
+  // background: #48e10c8e;
+  transform: scale(0.9);
+  transition: 0.1s;
+}
 .enter, .backspace, .shift, .caps-lock{
   width: calc(5% + 82px);
 }
