@@ -12,6 +12,7 @@ export class Keyboard {
 		document.addEventListener("keyup", this.handleKeyUp.bind(this));
 		this.container = document.createElement("div");
 		this.container.classList.add("keyboard");
+
 	}
   saveLanguageToLocalStorage(language) {
     localStorage.setItem('userLanguage', language);
@@ -797,10 +798,16 @@ export class Keyboard {
 			case "Backspace":
 				keyElement.classList.add("backspace");
 				keyElement.dataset.code = "Backspace";
+        keyElement.addEventListener('click', () => {
+          this.textArea.value = this.textArea.value.slice(0, -1);
+                })
 				break;
 			case "Tab":
 				keyElement.classList.add("tab");
 				keyElement.dataset.code = "Tab";
+        keyElement.addEventListener("click", () => {
+                   this.textArea.value +=  '    ';
+        })
 				break;
 			case "Option":
 				keyElement.classList.add("alt");
@@ -809,10 +816,17 @@ export class Keyboard {
 			case "CapsLock":
 				keyElement.classList.add("caps-lock");
 				keyElement.dataset.code = "CapsLock";
+        keyElement.addEventListener("click", () => {
+          this.isCapsPressed = !this.isCapsPressed;
+          this.toggleCaps();
+        })
 				break;
 			case "Enter":
 				keyElement.classList.add("enter");
 				keyElement.dataset.code = "Enter";
+        keyElement.addEventListener('click', () => {
+          this.textArea.value +=  '\n';
+                })
 				break;
 			case "Shift":
 				keyElement.classList.add("shift");
@@ -825,6 +839,9 @@ export class Keyboard {
 			case " ":
 				keyElement.classList.add("space");
 				keyElement.dataset.code = "Space";
+        keyElement.addEventListener('click', () => {
+          this.textArea.value +=  ' ';
+        })
 				break;
 			case "Command":
 				keyElement.classList.add("command");
@@ -858,4 +875,5 @@ export class Keyboard {
 		this.keys.add(key);
 		return keyElement;
 	}
+
 }
