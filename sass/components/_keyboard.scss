@@ -1,0 +1,116 @@
+body {
+  display: flex; 
+  flex-direction: column;
+  background-color: black;
+  background-image: radial-gradient(
+    rgba(0, 114, 0, 0.75), black 50%
+  );}
+.keyboard {
+  max-width: 862px;
+  margin: 0 auto;
+  // text-align: center;
+  display: grid;
+  // background-color: rgb(136, 136, 136);
+//   background: rgb(180,58,145);
+// background: linear-gradient(90deg, rgba(180,58,145,1) 0%, rgba(65,150,183,1) 25%, rgba(29,223,253,1) 40%, rgba(69,80,252,1) 100%);
+background: black;
+margin-top: 20px;
+}
+
+.row {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 1px;
+}
+.key {
+  width: 60px;
+  height: 50px;
+  background: none;
+  color: #48e10c9b;
+  border: 1px solid #48e10c2e;
+  font: 0.8rem IBM Plex Mono, monospace;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.key:active {
+  // border-radius: 50%;
+  border: 1px solid #48e10c8e;
+  // background: #48e10c8e;
+  transform: scale(0.9);
+  transition: 0.1s;
+}
+.key {
+  outline: none;
+}
+
+.active {
+  border: 1px solid #48e10c8e;
+  // background: #48e10c8e;
+  transform: scale(0.9);
+  transition: 0.1s;
+}
+.enter, .backspace, .shift, .caps-lock{
+  width: calc(5% + 82px);
+}
+.ctrl, .alt, .tab, .command {
+  width: calc(5% + 48px);
+}
+
+.ctrl {
+  width: calc(5% + 22px);
+}
+
+
+.space {
+  width: calc(20% + 70px);
+
+}
+
+.text {
+  width: 862px;
+  margin: 0 auto;
+  margin-top: 150px;
+  height: 200px;
+  border: 1px solid #48e10c2a;
+  overflow: auto;
+  outline: none;
+  background-color: black;
+  background-image: linear-gradient(
+    rgba(50, 114, 0, 0.42), black 50%
+  );
+  font: 1rem IBM Plex Mono, monospace; 
+   text-shadow: 1px 1px 15px #8cff00;
+
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 22px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+
+}
+
+.text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(black, 0.55),
+    rgba(black, 0.55) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+.active {
+  border: 1px solid #48e10c8e;
+  transform: scale(0.9);
+  transition: 0.1s;
+}
