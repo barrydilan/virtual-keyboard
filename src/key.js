@@ -1,7 +1,7 @@
 export class Key {
   constructor(labelEn, labelRu) {
     this.labelEn = labelEn;
-    this.labelRu = labelRu
+    this.labelRu = labelRu;
   }
 
   render(lang) {
@@ -11,5 +11,4 @@ export class Key {
     keyElement.classList.add('key');
     return keyElement;
   }
-
 }
